@@ -6,7 +6,7 @@
 
 # Configure a Consul client
 
-node.set.consul.service_mode = "client"
+node.override.consul.service_mode = "client"
 include_recipe "consul"
 
 # add service checks...
