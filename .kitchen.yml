@@ -7,10 +7,19 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
-  - name: centos-6.4
 
 suites:
-  - name: default
+  - name: server
     run_list:
-      - recipe[scpr-consul::default]
+      - recipe[scpr-consul::server]
     attributes:
+      consul:
+        servers:      nil
+        service_mode: bootstrap
+  - name: web_service_check
+    run_list:
+      - recipe[scpr-consul-test::web_service]
+    attributes:
+      consul:
+        service_user: root
+        service_group: root

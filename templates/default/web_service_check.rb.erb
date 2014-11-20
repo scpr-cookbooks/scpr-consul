@@ -1,0 +1,36 @@
+#!/opt/chef/embedded/bin/ruby
+
+require "net/http"
+
+DIR = "<%= @resource.dir %>"
+HOSTNAME = "<%= @resource.hostname %>"
+PATH = "<%= @resource.path %>"
+
+<% if @resource.match.is_a?(Regexp) %>
+MATCH = /<%= @resource.match.to_s %>/
+<% else %>
+MATCH = "<%= @resource.match %>"
+<% end %>
+
+# -- Make sure our deploy dir exists -- #
+
+if !Dir.exists?(DIR)
+  $stderr.puts "Deploy directory does not exist."
+  exit 2
+end
+
+# -- Test Web Response -- #
+
+begin
+  Net::HTTP.start("127.0.0.1",80) do |http|
+    request = Net::HTTP::Get.new URI("http://#{ HOSTNAME }#{ PATH || "/" }")
+
+    response = http.request request
+
+    puts "Response is #{response}"
+  end
+rescue => e
+  $stderr.puts "Error is #{ e }"
+  exit 2
+end
+
