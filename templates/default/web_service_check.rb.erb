@@ -22,15 +22,27 @@ end
 # -- Test Web Response -- #
 
 begin
+  uri = URI("http://#{ HOSTNAME }#{ PATH || "/" }")
   Net::HTTP.start("127.0.0.1",80) do |http|
-    request = Net::HTTP::Get.new URI("http://#{ HOSTNAME }#{ PATH || "/" }")
+    request = Net::HTTP::Get.new uri.request_uri, "Host" => uri.host
 
     response = http.request request
 
-    puts "Response is #{response}"
+    if response.is_a?(Net::HTTPNotFound)
+      $stdout.puts "HTTP response was a 404"
+      exit 2
+    end
+
+    if response.status == 200
+      exit 0
+    else
+      $stdout.puts "HTTP Response was #{ response.status }."
+      exit 2
+    end
   end
 rescue => e
-  $stderr.puts "Error is #{ e }"
+  $stdout.puts "HTTP Request errored: #{ e }"
   exit 2
 end
+
 
