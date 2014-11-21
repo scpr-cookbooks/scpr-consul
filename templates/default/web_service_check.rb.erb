@@ -15,7 +15,7 @@ MATCH = "<%= @resource.match %>"
 # -- Make sure our deploy dir exists -- #
 
 if !Dir.exists?(DIR)
-  $stderr.puts "Deploy directory does not exist."
+  $stdout.puts "Check directory does not exist. Code not yet deployed?"
   exit 2
 end
 
