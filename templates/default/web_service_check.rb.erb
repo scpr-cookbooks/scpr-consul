@@ -28,11 +28,11 @@ begin
 
     response = http.request request
 
-    if response.code == 200
+    if response.code == '200'
       $stdout.puts "HTTP request returned 200 OK."
       exit 0
     else
-      $stdout.puts "HTTP Response was #{ response.status }."
+      $stdout.puts "Error: HTTP Response was #{ response.code }."
       exit 2
     end
   end
