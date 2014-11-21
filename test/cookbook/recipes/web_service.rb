@@ -1,6 +1,6 @@
 
 # install the default consul recipe, which bootstraps a server
-include_recipe "consul::default"
+include_recipe "scpr-consul"
 
 # create a directory
 directory "/scpr/testing" do

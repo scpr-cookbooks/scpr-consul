@@ -9,3 +9,16 @@ default.consul.ui_dir   = "/usr/local/consul_ui"
 # FIXME: need to see why consul cookbook sets the agent to run as root
 default.consul.service_user = 'root'
 default.consul.service_group = 'root'
+
+#----------
+
+include_attribute 'dnsmasq'
+
+default.dnsmasq.enable_dhcp = false
+default.dnsmasq.dns_options = ["server=/consul/127.0.0.1#8600"]
+default.dnsmasq.dns = {
+  'server' => '127.0.0.1'
+}
+
+
+
