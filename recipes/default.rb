@@ -19,3 +19,8 @@ end
 include_recipe "dnsmasq"
 
 # add service checks...
+
+directory node.scpr_consul.checks_dir do
+  action    :create
+  recursive true
+end
