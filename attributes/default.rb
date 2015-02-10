@@ -20,5 +20,8 @@ default.dnsmasq.dns = {
   'server' => '127.0.0.1'
 }
 
+#----------
 
+include_attribute 'consul'
 
+default.consul.service_mode = 'client'

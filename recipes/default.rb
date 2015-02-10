@@ -6,7 +6,6 @@
 
 # Configure a Consul client
 
-node.override.consul.service_mode = "client"
 include_recipe "consul"
 
 # -- Install dnsmasq -- #
@@ -23,4 +22,8 @@ include_recipe "dnsmasq"
 directory node.scpr_consul.checks_dir do
   action    :create
   recursive true
+end
+
+if node.consul.service_mode == 'cluster'
+  include_recipe "consul::ui"
 end
