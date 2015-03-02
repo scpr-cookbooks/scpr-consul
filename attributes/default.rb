@@ -22,6 +22,8 @@ default.consul.service_group  = 'root'
 
 default.consul.service_mode   = 'client'
 
+default.consul.version        = "0.5.0"
+
 # these can be removed when the consul cookbook next bumps and includes them
 default.consul.checksums['0.5.0_darwin_amd64'] = '24d9758c873e9124e0ce266f118078f87ba8d8363ab16c2e59a3cd197b77e964',
 default.consul.checksums['0.5.0_linux_386']    = '4b6147c30596a30361d4753d409f8a1af9518f54f5ed473a4c4ac973738ac0fd',
