@@ -5,6 +5,7 @@ require "net/http"
 DIR = "<%= @resource.dir %>"
 HOSTNAME = "<%= @resource.hostname %>"
 PATH = "<%= @resource.path %>"
+PORT = "<%= @resource.port %>"
 
 <% if @resource.match.is_a?(Regexp) %>
 MATCH = /<%= @resource.match.to_s %>/
@@ -14,7 +15,7 @@ MATCH = "<%= @resource.match %>"
 
 # -- Make sure our deploy dir exists -- #
 
-if !Dir.exists?(DIR)
+if DIR != "" && !Dir.exists?(DIR)
   $stdout.puts "Check directory does not exist. Code not yet deployed?"
   exit 2
 end
@@ -23,7 +24,7 @@ end
 
 begin
   uri = URI("http://#{ HOSTNAME }#{ PATH || "/" }")
-  Net::HTTP.start("127.0.0.1",80) do |http|
+  Net::HTTP.start("127.0.0.1",PORT) do |http|
     request = Net::HTTP::Get.new uri.request_uri, "Host" => uri.host
 
     response = http.request request

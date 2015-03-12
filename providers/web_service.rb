@@ -1,4 +1,10 @@
 action :create do
+  if new_resource.name_suffix
+    svc_name = "#{new_resource.name}_#{new_resource.name_suffix}"
+  else
+    svc_name = new_resource.name
+  end
+
   directory node.scpr_consul.checks_dir do
     action    :create
     recursive true
@@ -15,13 +21,17 @@ action :create do
     })
   end
 
-  consul_service_def "#{new_resource.name}_web" do
+  consul_service_def svc_name do
     action    :create
     check({
       interval: '5s',
       script:   "#{node.scpr_consul.checks_dir}/#{new_resource.name}"
     })
-    tags      ["web"]
+
+    if new_resource.tags
+      tags      new_resource.tags
+    end
+
     notifies  :reload, "service[consul]"
   end
 
