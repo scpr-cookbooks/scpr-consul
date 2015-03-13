@@ -28,6 +28,8 @@ action :create do
       script:   "#{node.scpr_consul.checks_dir}/#{new_resource.name}"
     })
 
+    port      new_resource.port.to_i
+
     if new_resource.tags
       tags      new_resource.tags
     end
