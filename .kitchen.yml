@@ -24,11 +24,3 @@ suites:
         service_mode: server
         service_user: root
         service_group: root
-  - name: consul05
-    run_list:
-      - recipe[scpr-consul]
-    attributes:
-      consul:
-        version:      "0.5.0"
-        servers:      nil
-        service_mode: bootstrap
