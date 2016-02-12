@@ -21,6 +21,4 @@ suites:
       - recipe[scpr-consul-test::web_service]
     attributes:
       consul:
-        service_mode: server
-        service_user: root
-        service_group: root
+        service_mode: bootstrap

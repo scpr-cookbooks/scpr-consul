@@ -16,7 +16,9 @@ include_attribute 'consul'
 
 default.consul.servers        = ['127.0.0.1']
 
-# FIXME: need to see why consul cookbook sets the agent to run as root
+# FIXME: this is a by-product of how an old version of the consul cookbook
+# used to set up the consul service. it now uses 'consul', but we're still
+# on 'root' because we haven't taken the time to assess the change
 default.consul.service_user   = 'root'
 default.consul.service_group  = 'root'
 

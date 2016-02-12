@@ -21,20 +21,21 @@ action :create do
     })
   end
 
-  consul_service_def svc_name do
-    action    :create
-    check({
-      interval: '5s',
-      script:   "#{node.scpr_consul.checks_dir}/#{new_resource.name}"
+  consul_definition svc_name do
+    action :create
+    type 'service'
+    user node.consul.service_user
+    group node.consul.service_group
+    parameters({
+      port: new_resource.port.to_i,
+      checks: [{
+        interval: '5s',
+        script:   "#{node.scpr_consul.checks_dir}/#{new_resource.name}",
+      }],
+      tags: new_resource.tags||[],
     })
 
-    port      new_resource.port.to_i
-
-    if new_resource.tags
-      tags      new_resource.tags
-    end
-
-    notifies  :reload, "service[consul]"
+    notifies  :reload, "consul_service[consul]", :delayed
   end
 
 end
