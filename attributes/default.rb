@@ -37,11 +37,10 @@ default.consul.checksums['0.5.0_web_ui']       = '0081d08be9c0b1172939e92af5a7cf
 
 include_attribute "consul-template"
 
-default.consul_template.base_url = "https://s3-us-west-2.amazonaws.com/scpr-binaries/consul-template/"
+default.consul_template.base_url = "https://github.com/hashicorp/consul-template/archive/"
 default.consul_template.version = "0.12.2"
 default.consul_template.checksums = {
-  'consul-template_0.7.0_linux_amd64' => '7b8fb97caef72f9e67bbb9069042b8e01f7efed3acd2a32f560a8fe60146d874',
-  'consul-template_0.12.2_linux_amd64' => '525b7ea6a2912c67ab9fcebb603b60d9ab69ed572d6a753803f8c46badec10da',
+  'consul_template_0.12.2_linux_amd64' => '9dc6e3a7fa027d63d2de473bc2b5d5b4106381f1741f1acb707f42336af944b9',
 }
 
 default.consul_template.config = {
