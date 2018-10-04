@@ -1,12 +1,18 @@
 ---
 driver:
-  name: vagrant
+  name: docker
+  use_sudo: false
+  privileged: true
+  username: kitchen
+  provision_command: mkdir -p /run/sshd && apt-get -y install build-essential libffi-dev
 
 provisioner:
   name: chef_zero
+  require_chef_omnibus: 12
 
 platforms:
   - name: ubuntu-12.04
+  - name: ubuntu-18.04
 
 suites:
   - name: server
