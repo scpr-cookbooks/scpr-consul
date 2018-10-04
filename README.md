@@ -1,6 +1,6 @@
 # scpr-consul
 
-TODO: Enter the cookbook description here.
+A cookbook to configure consul and consul-template
 
 ## Pushing out updates
 
