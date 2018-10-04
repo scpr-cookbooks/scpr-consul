@@ -9,6 +9,6 @@ long_description 'Installs/Configures scpr-consul'
 supports         'ubuntu'
 version          '0.2.9'
 
-depends "consul", "~> 0.11"
-depends "consul-template", "~> 0.9.1"
-depends "dnsmasq"
+depends 'consul', '~> 0.11'
+depends 'consul-template', '~> 0.9.1'
+depends 'dnsmasq'
