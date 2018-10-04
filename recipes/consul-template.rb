@@ -1,1 +1,1 @@
-include_recipe "consul-template"
+include_recipe 'consul-template'

@@ -6,4 +6,4 @@ description      '(test) Installs/Configures scpr-consul'
 long_description '(test) Installs/Configures scpr-consul'
 version          '0.0.1'
 
-depends "scpr-consul"
+depends 'scpr-consul'

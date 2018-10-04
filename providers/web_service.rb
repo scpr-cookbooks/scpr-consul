@@ -1,9 +1,9 @@
 action :create do
-  if new_resource.name_suffix
-    svc_name = "#{new_resource.name}_#{new_resource.name_suffix}"
-  else
-    svc_name = new_resource.name
-  end
+  svc_name = if new_resource.name_suffix
+               "#{new_resource.name}_#{new_resource.name_suffix}"
+             else
+               new_resource.name
+             end
 
   directory node.scpr_consul.checks_dir do
     action    :create
@@ -13,28 +13,25 @@ action :create do
   # write our service check script...
   template "#{node.scpr_consul.checks_dir}/#{new_resource.name}" do
     action    :create
-    source    "web_service_check.rb.erb"
-    cookbook  "scpr-consul"
+    source    'web_service_check.rb.erb'
+    cookbook  'scpr-consul'
     mode      0755
-    variables({
+    variables(
       resource: new_resource
-    })
+    )
   end
 
   consul_service_def svc_name do
-    action    :create
-    check({
+    action :create
+    check(
       interval: '5s',
       script:   "#{node.scpr_consul.checks_dir}/#{new_resource.name}"
-    })
+    )
 
-    port      new_resource.port.to_i
+    port new_resource.port.to_i
 
-    if new_resource.tags
-      tags      new_resource.tags
-    end
+    tags new_resource.tags if new_resource.tags
 
-    notifies  :reload, "service[consul]"
+    notifies :reload, 'service[consul]'
   end
-
 end

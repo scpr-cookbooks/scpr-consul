@@ -6,16 +6,16 @@
 
 # Configure a Consul client
 
-include_recipe "consul"
+include_recipe 'consul'
 
 # -- Install dnsmasq -- #
 
-file "/etc/default/resolvconf" do
+file '/etc/default/resolvconf' do
   action :create
-  content "TRUNCATE_NAMESERVER_LIST_AFTER_LOOPBACK_ADDRESS=no"
+  content 'TRUNCATE_NAMESERVER_LIST_AFTER_LOOPBACK_ADDRESS=no'
 end
 
-include_recipe "dnsmasq"
+include_recipe 'dnsmasq'
 
 # add service checks...
 
@@ -24,6 +24,4 @@ directory node.scpr_consul.checks_dir do
   recursive true
 end
 
-if node.consul.service_mode == 'cluster'
-  include_recipe "consul::ui"
-end
+include_recipe 'consul::ui' if node.consul.service_mode == 'cluster'
