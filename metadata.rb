@@ -7,8 +7,9 @@ license          'All rights reserved'
 description      'Installs/Configures scpr-consul'
 long_description 'Installs/Configures scpr-consul'
 supports         'ubuntu'
-version          '0.2.10'
+version          '0.2.14'
 
 depends 'consul', '~> 0.11'
 depends 'consul-template', '~> 0.9.1'
 depends 'dnsmasq'
+depends "libarchive", "~> 1.0.0"
