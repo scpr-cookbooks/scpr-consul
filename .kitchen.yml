@@ -1,18 +1,28 @@
 ---
 driver:
-  name: docker
-  use_sudo: false
-  privileged: true
-  username: kitchen
-  provision_command: mkdir -p /run/sshd && apt-get -y install build-essential libffi-dev
+  name: dokken
+  chef_version: 12
+
+transport:
+  name: dokken
 
 provisioner:
-  name: chef_zero
-  require_chef_omnibus: 12
+  name: dokken
 
 platforms:
   - name: ubuntu-12.04
+    driver:
+      image: ubuntu-upstart:12.04
+      pid_one_command: /sbin/init
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get -y install build-essential libffi-dev
   - name: ubuntu-18.04
+    driver:
+      image: dokken/ubuntu-18.04
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+        - RUN /usr/bin/apt-get -y install build-essential libffi-dev
 
 suites:
   - name: server

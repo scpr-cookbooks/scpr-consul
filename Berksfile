@@ -6,4 +6,6 @@ cookbook 'consul-template', '= 0.9.1'
 cookbook 'scpr-consul-test',
   path: 'test/cookbook'
 
+cookbook 'libarchive', '= 1.0.0'
+
 metadata
