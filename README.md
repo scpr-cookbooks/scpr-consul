@@ -1,4 +1,5 @@
 # scpr-consul
+[![CircleCI](https://circleci.com/gh/scpr-cookbooks/scpr-consul.svg?style=svg)](https://circleci.com/gh/scpr-cookbooks/scpr-consul)
 
 A cookbook to configure consul and consul-template
 
