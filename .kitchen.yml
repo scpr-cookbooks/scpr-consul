@@ -14,6 +14,9 @@ platforms:
   - name: ubuntu-12.04
   - name: ubuntu-18.04
 
+verifier:
+  name: inspec
+
 suites:
   - name: server
     run_list:
@@ -22,6 +25,9 @@ suites:
       consul:
         servers:      nil
         service_mode: bootstrap
+    verifier:
+      inspec_tests:
+        - test/integration/server
   - name: web_service_check
     run_list:
       - recipe[scpr-consul-test::web_service]
